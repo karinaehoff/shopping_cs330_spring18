@@ -1,0 +1,129 @@
+<!--
+	HTML for Shopping List App
+	Author: Kari Hoff
+	Class: CS 330
+-->
+
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Shopping List</title>
+		<meta name="description"
+			content="A Shopping List Application" />
+		<meta http-equiv="author"
+			content="Kari Hoff" />
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+
+	<body>
+		<div id=heading>
+			<h1>Shopping List</h1>
+			<!-- Search Box -->
+			<form action="">
+				<input type="search" name="search" placeholder="Search List" />
+				<input type="submit" value="Search" />
+			</form>
+		</div> <!-- end of heading -->
+
+
+		<div id=dataEntry>
+
+			<!-- Add <form action="hyperlink" method="get/post">...</form> ? -->
+			<fieldset>
+				<legend>Product Details</legend>
+
+				<label>Name:<br />
+				<input type="text" id="productName" placeholder="Enter Product Name"/></label><br />
+
+				<label>Store:<br />
+				<input type="text" id="store" placeholder="Enter Store Name"/></label><br />
+
+				<!-- Drop Down Option for Store
+				<p>Store:</p>
+				<select name="store">
+					<option value="grocery">Grocery</option>
+					<option value="hardware">Hardware</option>
+					<option value="bookstore">Book Store</option>
+				</select> -->
+
+				<label>Section:<br />
+				<input type="text" id="section" placeholder="Enter Section Name"/></label><br />
+
+				<label>Price:<br />
+				<input type="text" id="price" placeholder="Enter Price"/></label>
+
+
+				<!-- Drop Down Option for Section
+				<h2>Section</h2>
+				<select name="section">
+					<option value="produce">Produce</option>
+					<option value="housewares">Housewares</option>
+				</select> -->
+
+				<p>Quantity:
+					<select id=qty>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+					</select>
+				</p>
+
+				<p id=priority>Priority:
+					<input id="low" type="radio" name="priority" value="low">
+					<label for="low">Low</label>
+					<input id="medium" type="radio" name="priority" value="medium">
+					<label for="medium">Medium</label>
+					<input id="high" type="radio" name="priority" value="high">
+					<label for="high">High</label>
+				</p>
+
+				<!-- Drop Down Option for Priority
+				<select name="priority">
+					<option value="low">Low</option>
+					<option value="medium">Medium</option>
+					<option value="high">High</option>
+				</select>
+				-->
+
+				<div class="center">
+					<button type="button" id=addItemButton onclick="addItem()">Add Item</button>
+				</div> <!-- End of center div -->
+			</fieldset>
+
+		</div> <!-- end of dataEntry -->
+
+		<div id=shoppingList>
+			<!-- Box & Data listing format?-->
+			<table id=itemList>
+				<thead>
+					<tr>
+						<th></th> <!-- This is to format for the check box for each row -->
+						<th scope="col">Item</th>
+						<th scope="col">Quantity</th>
+						<th scope="col">Store</th>
+						<th scope="col">Section</th>
+						<th scope="col">Price</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<!-- Main Content - values added through script.js & user input-->
+				</tbody>
+
+				<tfoot>
+					<!-- Add Price Calculation -->
+				</tfoot>
+			</table>
+		</div> <!-- end of shoppingList -->
+		<script type="text/javascript" src="script.js?=x7"></script>
+	</body>
+	
+</html>
