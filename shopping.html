@@ -13,54 +13,64 @@
 			content="A Shopping List Application" />
 		<meta http-equiv="author"
 			content="Kari Hoff" />
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<!-- Original Style Sheet
+		<link rel="stylesheet" type="text/css" href="css/style.css"> -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	</head>
 
 	<body>
-		<div id=heading>
-			<h1>Shopping List</h1>
+
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		  <a class="navbar-brand" href="#">Shopping List</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		    <ul class="navbar-nav mr-auto">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#">Link</a>
+		      </li>
+		      <li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Dropdown
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		          <a class="dropdown-item" href="#">Action</a>
+		          <a class="dropdown-item" href="#">Another action</a>
+		          <div class="dropdown-divider"></div>
+		          <a class="dropdown-item" href="#">Something else here</a>
+		        </div>
+		      </li>
+		    </ul>
+		    <form class="form-inline my-2 my-lg-0">
+		      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+		      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+		    </form>
+		  </div>
+		</nav>
+
+
+		<!-- <div id=heading>
+			<h1>Shopping List</h1> -->
 			<!-- Search Box -->
-			<form action="">
+			<!-- <form action="">
 				<input type="search" name="search" placeholder="Search List" />
 				<input type="submit" value="Search" />
 			</form>
-		</div> <!-- end of heading -->
+		</div>  --><!-- end of heading -->
 
 
-		<div id=dataEntry>
-
-			<!-- Add <form action="hyperlink" method="get/post">...</form> ? -->
-			<fieldset>
-				<legend>Product Details</legend>
-
-				<label>Name:<br />
-				<input type="text" id="productName" placeholder="Enter Product Name"/></label><br />
-
-				<label>Store:<br />
-				<input type="text" id="store" placeholder="Enter Store Name"/></label><br />
-
-				<!-- Drop Down Option for Store
-				<p>Store:</p>
-				<select name="store">
-					<option value="grocery">Grocery</option>
-					<option value="hardware">Hardware</option>
-					<option value="bookstore">Book Store</option>
-				</select> -->
-
-				<label>Section:<br />
-				<input type="text" id="section" placeholder="Enter Section Name"/></label><br />
-
-				<label>Price:<br />
-				<input type="text" id="price" placeholder="Enter Price"/></label>
-
-
-				<!-- Drop Down Option for Section
-				<h2>Section</h2>
-				<select name="section">
-					<option value="produce">Produce</option>
-					<option value="housewares">Housewares</option>
-				</select> -->
-
+		<div class="container" style="width: 75%;">
+		  <div class="row">
+		    <div class="col">
+		      <p>Product Name:
+				<input type="text" id="productName" placeholder="Enter Product Name"/></p>
+			</div>
+			<div class="col">
 				<p>Quantity:
 					<select id=qty>
 						<option value="1">1</option>
@@ -75,34 +85,65 @@
 						<option value="10">10</option>
 					</select>
 				</p>
+			</div>
+		    <div class="col">
+		        <p>Price:
+				<input type="text" id="price" placeholder="Enter Price"/></p>
+		    </div>
+		  </div>
+		  <div class="row">
+		    <div class="col">
+		      <p>Store:
+				<select id="store">
+					<option value="grocery">Grocery</option>
+					<option value="hardware">Hardware</option>
+					<option value="bookstore">Book Store</option>
+				</select></p>
+		    </div>
+		    <div class="col">
+		      <p>Section
+				<select id="section">
+					<option value="produce">Produce</option>
+					<option value="housewares">Housewares</option>
+				</select></p>
+		    </div>
+		    <div class="col">
+		      <p>Priority
+		      <select id="priority">
+					<option value="low">Low</option>
+					<option value="medium">Medium</option>
+					<option value="high">High</option>
+				</select></p>
+		    </div>
+		  </div>
+		</div>
 
-				<p id=priority>Priority:
+				<!-- <label>Store:<br />
+				<input type="text" id="store" placeholder="Enter Store Name"/></label><br />
+
+				<label>Section:<br />
+				<input type="text" id="section" placeholder="Enter Section Name"/></label><br /> -->
+
+				<!-- <p id=priority>Priority:
 					<input id="low" type="radio" name="priority" value="low">
 					<label for="low">Low</label>
 					<input id="medium" type="radio" name="priority" value="medium">
 					<label for="medium">Medium</label>
 					<input id="high" type="radio" name="priority" value="high">
 					<label for="high">High</label>
-				</p>
+				</p> -->
 
-				<!-- Drop Down Option for Priority
-				<select name="priority">
-					<option value="low">Low</option>
-					<option value="medium">Medium</option>
-					<option value="high">High</option>
-				</select>
-				-->
-
-				<div class="center">
+				<div class="mx-auto" style="width:200px;"> <!-- class="center"> -->
 					<button type="button" id=addItemButton onclick="addItem()">Add Item</button>
 				</div> <!-- End of center div -->
 			</fieldset>
 
 		</div> <!-- end of dataEntry -->
 
+
 		<div id=shoppingList>
 			<!-- Box & Data listing format?-->
-			<table id=itemList>
+			<table id=itemList class="mx-auto" style="width:80%;">
 				<thead>
 					<tr>
 						<th></th> <!-- This is to format for the check box for each row -->
@@ -123,7 +164,9 @@
 				</tfoot>
 			</table>
 		</div> <!-- end of shoppingList -->
-		<script type="text/javascript" src="script.js?=x7"></script>
+
+
+		<script type="text/javascript" src="js/script.js?=x7"></script>
 	</body>
 	
 </html>

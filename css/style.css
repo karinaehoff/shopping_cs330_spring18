@@ -4,33 +4,23 @@
 	Class: CS 330
 */
 
-body {
+/*body {
 	background-color: rgb(200,200,200);
-	/*max-width: 50%;*/
 	margin: 0px;
 	padding: 0px;
-	/*margin-top: 5%;
-	margin-bottom: 5%;
-	margin-right: 25%;
-	margin-left: 25%;*/
-
 	font-family: Helvetica, sans-serif;
-}
+}*/
 
-button {
+/*button {
 	padding: 5px;
 }
-
-fieldset {
+*/
+/*fieldset {
 	max-width: 30%;
-}
-
-form:focus {
-	/* To be able to use tab to navigate -- how to set up? */
-}
+}*/
 
 h1 {
-	color: white;
+	/*color: white;*/
 	font-style: oblique;
 	letter-spacing: 0.2em;
 	text-shadow: 2px 2px 5px black;
