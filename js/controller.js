@@ -6,10 +6,13 @@
 "use strict"
 
 var testItem = new Item();
+
 // Global Instance of Shopping List
-var list = new ShoppingList();
+var shoppingModel = new ShoppingList();
+
 // Create View object (subscribes to shoppingList)
-var view = new Subject(list);
+// var view = new Subject(list);
+var view = new ShoppingView(list);
 
 let stores = ["Dragonfly",  "Fareway", "Fleet Farm", "Walmart"]
 let sections = {"Dragonfly":["Fiction", "Nonfiction"],
@@ -36,7 +39,7 @@ function clickedOn() {
 
 
 	// Call shoppingList addItem method
-	list.addItem(newItem);
+	shoppingModel.addItem(newItem);
 
 }
 

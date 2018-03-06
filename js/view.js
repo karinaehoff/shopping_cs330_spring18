@@ -61,25 +61,43 @@ function preMVCupdateList() {
 }
 
 class ShoppingView {
+	constructor(model) {
+		// The bind() method creates a new function
+		model.subscribe(this.redrawList.bind(this))
+	}
+
+	redrawList(shoppingList, msg) {
+		let tbl = document.getElementById("shoppingList")
+		tbl.innerHTML = ""
+		for (let item of shoppingList.newItems) {
+			this.addRow(item, tbl)
+		}
+	}
+
 	// At least a redrawTable callback function for when the shopping list changes
 	redrawTable(items){
 		let rowCount = 0;
 
-		let table = document.getElementById(itemList);
+		let table = document.getElementById("itemList");
 		let newRow = document.createElement("tr");
 
 		for (let item in items) {
-			newElement = document.createElement("input")
-			newElement.type = "checkbox"
-			newElement.onclick = somefunction; //No parentheses
+			checkBox = document.createElement("input")
+			checkbox.type = "checkbox"
+			checkbox.onclick = somefunction; //No parentheses
+			newRow.appendChild(checkbox)
 			for (let info in item) {
 				newCell = document.createElement("td")
 				newCell.innerHTML = info;
+				newRow.appendChild(newCell)
+				
 				// Changing Color of Each Item
 				//newRow.style.backgroundColor = item's priority
 			}
+			
 		}
 
+		table.appendChild(newRow)
 		rowCount++;
 	}
 }

@@ -13,6 +13,8 @@ class Item {
 		this.qty = qty;
 		this.price = price;
 		this.priority = priority;
+
+		this._purchased = false;
 	}
 
 	get name() {
@@ -62,10 +64,22 @@ class Item {
 	set priority(p) {
 		this.priority = p;
 	}
+
+	get purchased() {
+		return this._purchased;
+	}
+
+	set purchased(nv) {
+		this._purchased = nv;
+		alert(`${this.name} was purchased`)
+	}
 }
 
-class ShoppingList {
-	constructor(self, array) {
+class ShoppingList extends Subject {
+	constructor() {
+		super()
+		this.newItems = [];
+		this.oldItems = [];
 		this.itemList = array;
 	}
 
@@ -80,7 +94,7 @@ class ShoppingList {
 	addItem(item) {
 		this.itemList.push(item);
 		//call publish?
-		view.publish()
+		this.publish('newitem', this)
 	}
 
 	removeItem(item) {
@@ -96,10 +110,12 @@ class ShoppingList {
 class Subject {
 
 	constructor() {
+		// Handlers are functions that we want to call
 		this.handlers = []
 	}
 
 	subscribe(fn) {
+		// Add functions to the Array
 		this.handlers.push(fn);
 	}
 
@@ -113,6 +129,7 @@ class Subject {
 		);
 	}
 
+	// Executes Subject's Functions
 	publish(msg, someobj) {
 		var scope = someobj || window;
 		for (let fn of this.handlers) {
