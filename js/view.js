@@ -17,9 +17,7 @@ class ViewThing {
 	}
 }
 
-//module.exports = ViewThing;
-
-
+module.exports = ViewThing;
 
 // Display HTML
 //  1. Erase Table
@@ -27,10 +25,8 @@ class ViewThing {
 
 function preMVCupdateList() {
 	
-	// console.log(priority.value);
 	let list = document.getElementById("itemList")
 
-	//enter a new row with the information provided (get from form)
 	let div = document.createElement("div")
 	let row = document.createElement("tr");
 	row.id = ("row" + itemNum);
@@ -44,11 +40,11 @@ function preMVCupdateList() {
 	list.appendChild(div);
 
 	if (priority.value == "low") {
-		div.class = "p-3 mb-2 bg-success text-white";
+		div.style.backgroundColor = "green";
 	} else if (priority.value == "medium") {
-		div.class = "p-3 mb-2 bg-warning text-dark";
+		div.style.backgroundColor = "yellow";
 	} else {
-		div.class = "p-3 mb-2 bg-danger text-white";
+		div.style.backgroundColor = "red";
 	}
 
 	for (let item of info) {
@@ -65,16 +61,32 @@ function preMVCupdateList() {
 }
 
 class ShoppingView {
-	//At least a redrawTable callback function for when the shopping leist changes
+	// At least a redrawTable callback function for when the shopping list changes
 	redrawTable(items){
+		let rowCount = 0;
+
+		let table = document.getElementById(itemList);
+		let newRow = document.createElement("tr");
 
 		for (let item in items) {
-			
+			newElement = document.createElement("input")
+			newElement.type = "checkbox"
+			newElement.onclick = somefunction; //No parentheses
+			for (let info in item) {
+				newCell = document.createElement("td")
+				newCell.innerHTML = info;
+				// Changing Color of Each Item
+				//newRow.style.backgroundColor = item's priority
+			}
 		}
+
+		rowCount++;
 	}
 }
 
 // Checked item should change to strikethrough
+function checked() {
 
+}
 
 // then disappear after a few seconds

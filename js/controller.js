@@ -40,40 +40,21 @@ function clickedOn() {
 
 }
 
-// To Do
-// get priority to change the color of the row
 // add a strikethrough option when the checkbox is clicked for a row
+function checkedOff(element) {
+	let parent = element.parentElement
+	parent.nodeName
 
+	//Checked for 
+	// https://stackoverflow.com/questions/22916038/strikethrough-table-and-or-div
+	if (element.checked) {
+		parent.class = "strikethrough"
+	} else {
+		parent.class = "";
+	}
+	
 
+	// Refer to view.js for this?
+	// I created a function there to handle this, but I'm not sure about placement tbh
 
-// Retrieve an item based on id
-// function item(id) {
-// 	let item = document.querySelector("#" + id);
-// 	return item;
-// }
-
-// Retrieve a list item (product & info)
-// function list(rowNum) {
-// 	let rowCall = document.querySelector("#row"+rowNum)
-// 	console.log(rowCall)
-
-// 	let product = document.querySelector("#productName"+rowNum);
-// 	console.log(product)
-// 	console.log(product.innerHTML)
-// 	let store = document.querySelector("#store"+rowNum);
-// 	console.log(store)
-// 	console.log(store.innerHTML)
-// 	let section = document.querySelector("#section"+rowNum);
-// 	console.log(section)
-// 	console.log(section.innerHTML)
-// 	let qty = document.querySelector("#qty"+rowNum);
-// 	console.log(qty)
-// 	console.log(qty.innerHTML)
-// 	let price = document.querySelector("#price"+rowNum);
-// 	console.log(price)
-// 	console.log(price.innerHTML)
-
-// 	let item = [product.innerHTML, qty.innerHTML, store.innerHTML, section.innerHTML, price.innerHTML];
-
-// 	return item;
-// }
+}

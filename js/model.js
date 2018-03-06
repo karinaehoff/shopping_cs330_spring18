@@ -79,7 +79,7 @@ class ShoppingList {
 
 	addItem(item) {
 		this.itemList.push(item);
-		//call publish
+		//call publish?
 		view.publish()
 	}
 
