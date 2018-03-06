@@ -17,7 +17,7 @@ class ViewThing {
 	}
 }
 
-module.exports = ViewThing;
+// My Code
 
 // Display HTML
 //  1. Erase Table
@@ -27,6 +27,7 @@ function preMVCupdateList() {
 	
 	let list = document.getElementById("itemList")
 
+	// Is div necessary here?
 	let div = document.createElement("div")
 	let row = document.createElement("tr");
 	row.id = ("row" + itemNum);
@@ -61,6 +62,8 @@ function preMVCupdateList() {
 }
 
 class ShoppingView {
+
+	// ***Class Code from here
 	constructor(model) {
 		// The bind() method creates a new function
 		model.subscribe(this.redrawList.bind(this))
@@ -73,8 +76,9 @@ class ShoppingView {
 			this.addRow(item, tbl)
 		}
 	}
+	// to here***
 
-	// At least a redrawTable callback function for when the shopping list changes
+	// RedrawTable callback function for when the shopping list changes
 	redrawTable(items){
 		let rowCount = 0;
 
@@ -84,15 +88,15 @@ class ShoppingView {
 		for (let item in items) {
 			checkBox = document.createElement("input")
 			checkbox.type = "checkbox"
-			checkbox.onclick = somefunction; //No parentheses
+			checkbox.onclick = checked(); // Parentheses or no?
 			newRow.appendChild(checkbox)
-			for (let info in item) {
+			for (let info in [item.name, item.store, item.section, item.qty, item.price]) {
 				newCell = document.createElement("td")
 				newCell.innerHTML = info;
 				newRow.appendChild(newCell)
 				
 				// Changing Color of Each Item
-				//newRow.style.backgroundColor = item's priority
+				//newRow.style.backgroundColor = item.priority
 			}
 			
 		}
@@ -102,9 +106,12 @@ class ShoppingView {
 	}
 }
 
+
+// For Thurs March 8th:
+
 // Checked item should change to strikethrough
 function checked() {
-
+	// What Bootstrap element can do this? I haven't been able to find one.
 }
 
 // then disappear after a few seconds
