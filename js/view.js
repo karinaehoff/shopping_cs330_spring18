@@ -30,61 +30,27 @@ class ShoppingView {
 	}
 
 	redrawList(shoppingList, msg) {
-		let displayTable = document.getElementById("itemList")
-		displayTable.innerHTML = ""
-		let head = document.createElement("thead")
-		let row = document.createElement("tr")
-		let header = document.createElement("th")
-
-		let itemHead = document.createElement("th")
-		itemHead.innerHTML = "Item"
-		itemHead.scope = "col"
-
-		let qtyHead = document.createElement("th")
-		qtyHead.innerHTML = "Quantity"
-		qtyHead.scope = "col"
-
-		let storeHead = document.createElement("th")
-		storeHead.innerHTML = "Store"
-		storeHead.scope = "col"
-
-		let sectionHead = document.createElement("th")
-		sectionHead.innerHTML = "Section"
-		sectionHead.scope = "col"
-
-		let priceHead = document.createElement("th")
-		priceHead.innerHTML = "Price"
-		priceHead.scope = "col"
-
-		// This wasn't working correctly...
-		// for (let heading of ["Item", "Quantity", "Store", "Section", "Price"]) {
-		// 	let headingTitle = document.createElement("th")
-		// 	headingTitle.innerHTML = heading
-		// 	headingTitle.scope = "col"
-		// }
-		
-		let body = document.createElement("tbody")
-		body.id = "listPlacement"
-		let footer = document.createElement("tfoot")
-
-		displayTable.appendChild(head)
-		head.appendChild(row)
-		row.appendChild(header)
-		displayTable.appendChild(body)
-		displayTable.appendChild(footer)
-		console.log(displayTable)
+		let tableBody = document.getElementById("listPlacement")
+		tableBody.innerHTML = ""
 
 		for (let item of shoppingList._itemList) {
-			this.addRow(item, displayTable)
+			this.addRow(item, tableBody)
 		}
 		
 	}
 
 	addRow(item, parent) {
 		let row = document.createElement("tr")
-		row.classList.add(item.priority)
+		if (item.priority == "low") {
+					row.style.backgroundColor = "#d9f2d9"
+				} else if (item.priority == "medium") {
+					row.style.backgroundColor = "#f2f2d9"
+				} else {
+					row.style.backgroundColor = "#f2d9d9"
+				}
 		let cb = document.createElement("input")
 		cb.type = "checkbox"
+		cb.onclick = checked(row)
 		row.appendChild(cb)
 
 		for (let val of ['name', 'store', 'section', 'qty', 'price']) {
@@ -119,23 +85,11 @@ class ShoppingView {
 				newCell.innerHTML = info;
 				newRow.appendChild(newCell)
 				
-				// Changing Color of Each Item
-				//newRow.style.backgroundColor = item.priority
 			}
+
 			tableBody.appendChild(newRow)
 			owCount++;
 		}
 		
 	}
 }
-
-
-// For Thurs March 8th:
-
-// Checked item should change to strikethrough
-function checked() {
-
-	// What Bootstrap element can do this? I haven't been able to find one.
-}
-
-// then disappear after a few seconds

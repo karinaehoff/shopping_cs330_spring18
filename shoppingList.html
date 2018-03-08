@@ -1,0 +1,159 @@
+<!--
+	HTML for Shopping List App
+	Author: Kari Hoff
+	Class: CS 330
+-->
+
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Shopping List</title>
+		<meta name="description"
+			content="A Shopping List Application" />
+		<meta http-equiv="author"
+			content="Kari Hoff" />
+		<!-- Original Style Sheet -->
+		<!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		
+	</head>
+
+	<body onload="displayStores()">
+
+		<!-- Navigation Bar -->
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		  <a class="navbar-brand" href="#">Shopping List</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		    <ul class="navbar-nav mr-auto">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#">Link</a>
+		      </li>
+		      <li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Dropdown
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		          <a class="dropdown-item" href="#">Action</a>
+		          <a class="dropdown-item" href="#">Another action</a>
+		          <div class="dropdown-divider"></div>
+		          <a class="dropdown-item" href="#">Something else here</a>
+		        </div>
+		      </li>
+		    </ul>
+		    <form class="form-inline my-2 my-lg-0">
+		      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+		      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+		    </form>
+		  </div>
+		</nav>
+
+		<!-- Input Field -->
+		<div class="container" style="width: 75%;">
+		  <div class="row">
+		    <div class="col">
+		      <p>Product Name:
+				<input type="text" id="productName" placeholder="Enter Product Name"/></p>
+			</div>
+			<div class="col">
+				<p>Quantity:
+					<select id=qty selected=" ">
+						<option label=" "></option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+					</select>
+				</p>
+			</div>
+		    <div class="col">
+		        <p>Price:
+				<input type="text" id="price" placeholder="Enter Price"/></p>
+		    </div>
+		  </div>
+		  <div class="row">
+		    <div class="col">
+		      <p>Store:
+				<select id="store" onclick="displaySections()">
+					<option label=" "></option>
+				</select></p>
+		    </div>
+		    <div class="col">
+		      <p>Section
+				<select id="section" required="required">
+					<option label=" "></option>
+				</select></p>
+		    </div>
+		    <div class="col">
+		      <p>Priority
+		      <select id="priority">
+		      		<option label=" "></option>
+					<option value="low">Low</option>
+					<option value="medium">Medium</option>
+					<option value="high">High</option>
+				</select></p>
+		    </div>
+		  </div>
+		</div>
+
+		<!-- Radio Button Option for Priority -->
+		<!-- <p id=priority>Priority:
+			<input id="low" type="radio" name="priority" value="low">
+			<label for="low">Low</label>
+			<input id="medium" type="radio" name="priority" value="medium">
+			<label for="medium">Medium</label>
+			<input id="high" type="radio" name="priority" value="high">
+			<label for="high">High</label>
+		</p> -->
+
+				<div class="mx-auto" style="width:200px;"> <!-- class="center"> -->
+					<button type="button" id=addItemButton onclick="clickedOn()">Add Item</button>
+				</div> <!-- End of center div -->
+			</fieldset>
+
+		</div> <!-- end of dataEntry -->
+
+		<!-- Shopping List -->
+		<div id=shoppingList>
+			<table id=itemList class="table mx-auto" style="width:80%;">
+				<thead class="thead-light">
+					<tr>
+						<th></th> <!-- This is to format for the check box for each row -->
+						<th scope="col">Item</th>
+						<th scope="col">Quantity</th>
+						<th scope="col">Store</th>
+						<th scope="col">Section</th>
+						<th scope="col">Price</th>
+					</tr>
+				</thead>
+
+				<tbody id=listPlacement>
+					<!-- Main Content - values added through script.js & user input-->
+				</tbody>
+
+				<tfoot>
+					<!-- Add Price Calculation Eventually -->
+				</tfoot>
+			</table>
+		</div> <!-- end of shoppingList -->
+
+		
+		<script type="text/javascript" src="js/model.js?=x15"></script>
+		<script type="text/javascript" src="js/view.js?=x15"></script>
+		<script type="text/javascript" src="js/controller.js?=x15"></script>
+	</body>
+	
+</html>

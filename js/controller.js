@@ -45,11 +45,11 @@ function clickedOn() {
 	let qtyVal = document.getElementById("qty").value
 	let priceVal = document.getElementById("price").value
 	let priorityVal = document.getElementById("priority").value
-	// Create new item
 
+	// Create new item
 	let newItem = new Item(self, productVal, storeVal, sectionVal, qtyVal, priceVal, priorityVal);
 
-	// Call shoppingList addItem method
+	// Call shoppingList addItem method & clear input fields
 	shoppingModel.addItem(newItem);
 	for (let ref of [product, store, section, qty, price, priority]) {
 		ref.value = ""
@@ -86,17 +86,21 @@ function displaySections() {
 
 
 // add a strikethrough option when the checkbox is clicked for a row
-function checkedOff(element) {
+function checked(row) {
+	row.style.
 	let parent = element.parentElement
 	parent.nodeName
 
-	//Checked for 
-	// https://stackoverflow.com/questions/22916038/strikethrough-table-and-or-div
 	if (element.checked) {
 		parent.class = "strikethrough"
 	} else {
 		parent.class = "";
 	}
 	
-	// Probably use timer to wait a few seconds to do view.redrawTable(shoppingModel)
+	
 }
+
+// then disappear after a few second
+// Use timer to wait a few seconds to do:
+//    remove item from shoppingModel
+//    view.redrawTable(shoppingModel)
