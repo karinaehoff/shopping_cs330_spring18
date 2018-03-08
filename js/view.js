@@ -35,11 +35,34 @@ class ShoppingView {
 		let head = document.createElement("thead")
 		let row = document.createElement("tr")
 		let header = document.createElement("th")
-		for (let heading of ["Item", "Quantity", "Store", "Section", "Price"]) {
-			let headingTitle = document.createElement("th")
-			headingTitle.innerHTML = heading
-			headingTitle.scope = "col"
-		}
+
+		let itemHead = document.createElement("th")
+		itemHead.innerHTML = "Item"
+		itemHead.scope = "col"
+
+		let qtyHead = document.createElement("th")
+		qtyHead.innerHTML = "Quantity"
+		qtyHead.scope = "col"
+
+		let storeHead = document.createElement("th")
+		storeHead.innerHTML = "Store"
+		storeHead.scope = "col"
+
+		let sectionHead = document.createElement("th")
+		sectionHead.innerHTML = "Section"
+		sectionHead.scope = "col"
+
+		let priceHead = document.createElement("th")
+		priceHead.innerHTML = "Price"
+		priceHead.scope = "col"
+
+		// This wasn't working correctly...
+		// for (let heading of ["Item", "Quantity", "Store", "Section", "Price"]) {
+		// 	let headingTitle = document.createElement("th")
+		// 	headingTitle.innerHTML = heading
+		// 	headingTitle.scope = "col"
+		// }
+		
 		let body = document.createElement("tbody")
 		body.id = "listPlacement"
 		let footer = document.createElement("tfoot")
@@ -111,6 +134,7 @@ class ShoppingView {
 
 // Checked item should change to strikethrough
 function checked() {
+
 	// What Bootstrap element can do this? I haven't been able to find one.
 }
 
