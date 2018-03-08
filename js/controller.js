@@ -5,17 +5,15 @@
 
 "use strict"
 
-var testItem = new Item();
-
 // Global Instance of Shopping List
-var shoppingModel = new ShoppingList();
+var shoppingModel = new ShoppingList([]);
 
 // Create View object (subscribes to shoppingList)
-// var view = new Subject(list);
-var view = new ShoppingView(list);
+var view = new ShoppingView(shoppingModel);
 
-let stores = ["Dragonfly",  "Fareway", "Fleet Farm", "Walmart"]
-let sections = {"Dragonfly":["Fiction", "Nonfiction"],
+var stores = ["Dragonfly",  "Fareway", "Fleet Farm", "Walmart"]
+
+var sections = {"Dragonfly":["Fiction", "Nonfiction"],
 				"Fareway":["Produce", "Meat", "Frozen"],
 				"Fleet Farm":["Housewares", "Clothing", "Pets"],
 				"Walmart":["Electronics", "Pharmacy", "Food"]}
@@ -25,23 +23,67 @@ let itemNum = 1;
 // Called when add button is clicked
 function clickedOn() {
 
-	let product = document.querySelector("#productName");
-	let store = document.querySelector("#store");
-	let section = document.querySelector("#section");
-	let qty = document.querySelector("#qty");
-	let price = document.querySelector("#price");
-	let priority = document.querySelector("#priority");
+	// Dr. Miller's (Much Cleaner) Approach
+	// let rolColIds = ["product", "store", "section", "qty", "price", "priority"]
+	// let vals = {}
+	// for (let cId in rowColIds) {
+	// 	vals[cId] = document.getElementById(cId).value
+	// }
 
+	// Elements
+	let product = document.getElementById("productName")
+	let store = document.getElementById("store")
+	let section = document.getElementById("section")
+	let qty = document.getElementById("qty")
+	let price = document.getElementById("price")
+	let priority = document.getElementById("priority")
+
+	// Values
+	let productVal = document.getElementById("productName").value
+	let storeVal = document.getElementById("store").value
+	let sectionVal = document.getElementById("section").value
+	let qtyVal = document.getElementById("qty").value
+	let priceVal = document.getElementById("price").value
+	let priorityVal = document.getElementById("priority").value
 	// Create new item
-	//name, store, section, qty, price, priority
-	let newItem = new Item(product, store, section, qty, price, priority);
-	console.log(newItem)
 
+	let newItem = new Item(self, productVal, storeVal, sectionVal, qtyVal, priceVal, priorityVal);
 
 	// Call shoppingList addItem method
 	shoppingModel.addItem(newItem);
+	for (let ref of [product, store, section, qty, price, priority]) {
+		ref.value = ""
+	}
 
 }
+
+function displayStores() {
+	let selectTag = document.getElementById("store")
+	for (let store of stores) {
+		let option = document.createElement("option")
+		option.value = store
+		option.innerHTML = store
+		selectTag.appendChild(option)
+	}
+}
+
+// Add selection creator (changes sections depending on the store)
+function displaySections() {
+	let storeSelect = document.getElementById("store")
+	let store = storeSelect.value
+	let sectionList = sections[store]
+
+	let sectionSelect = document.getElementById("section")
+	sectionSelect.innerHTML = ""
+
+	for (let section of sectionList) {
+		let option = document.createElement("option")
+		option.value = section
+		option.innerHTML = section
+		sectionSelect.appendChild(option)
+	}
+}
+
 
 // add a strikethrough option when the checkbox is clicked for a row
 function checkedOff(element) {
@@ -56,8 +98,5 @@ function checkedOff(element) {
 		parent.class = "";
 	}
 	
-
-	// Refer to view.js for this?
-	// I created a function there to handle this, but I'm not sure about placement tbh
-
+	// Probably use timer to wait a few seconds to do view.redrawTable(shoppingModel)
 }

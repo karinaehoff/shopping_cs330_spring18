@@ -17,49 +17,9 @@ class ViewThing {
 	}
 }
 
-// My Code
-
 // Display HTML
 //  1. Erase Table
 //  2. Redraw from scratch
-
-function preMVCupdateList() {
-	
-	let list = document.getElementById("itemList")
-
-	// Is div necessary here?
-	let div = document.createElement("div")
-	let row = document.createElement("tr");
-	row.id = ("row" + itemNum);
-
-	let checkBox = document.createElement("input");
-	checkBox.type = "checkbox";
-	let cell = document.createElement("td");
-	cell.appendChild(checkBox);
-	row.appendChild(cell);
-	div.appendChild(row);
-	list.appendChild(div);
-
-	if (priority.value == "low") {
-		div.style.backgroundColor = "green";
-	} else if (priority.value == "medium") {
-		div.style.backgroundColor = "yellow";
-	} else {
-		div.style.backgroundColor = "red";
-	}
-
-	for (let item of info) {
-		let cell = document.createElement("td");
-		cell.id = (item.id + itemNum);
-		cell.innerHTML = item.value;
-		row.appendChild(cell);
-		list.appendChild(row);
-		item.value="";
-	}
-
-	itemNum++;
-
-}
 
 class ShoppingView {
 
@@ -70,11 +30,46 @@ class ShoppingView {
 	}
 
 	redrawList(shoppingList, msg) {
-		let tbl = document.getElementById("shoppingList")
-		tbl.innerHTML = ""
-		for (let item of shoppingList.newItems) {
-			this.addRow(item, tbl)
+		let displayTable = document.getElementById("itemList")
+		displayTable.innerHTML = ""
+		let head = document.createElement("thead")
+		let row = document.createElement("tr")
+		let header = document.createElement("th")
+		for (let heading of ["Item", "Quantity", "Store", "Section", "Price"]) {
+			let headingTitle = document.createElement("th")
+			headingTitle.innerHTML = heading
+			headingTitle.scope = "col"
 		}
+		let body = document.createElement("tbody")
+		body.id = "listPlacement"
+		let footer = document.createElement("tfoot")
+
+		displayTable.appendChild(head)
+		head.appendChild(row)
+		row.appendChild(header)
+		displayTable.appendChild(body)
+		displayTable.appendChild(footer)
+		console.log(displayTable)
+
+		for (let item of shoppingList._itemList) {
+			this.addRow(item, displayTable)
+		}
+		
+	}
+
+	addRow(item, parent) {
+		let row = document.createElement("tr")
+		row.classList.add(item.priority)
+		let cb = document.createElement("input")
+		cb.type = "checkbox"
+		row.appendChild(cb)
+
+		for (let val of ['name', 'store', 'section', 'qty', 'price']) {
+			let td = document.createElement("td")
+			td.innerHTML = item[val]
+			row.appendChild(td)
+		}
+		parent.appendChild(row)
 	}
 	// to here***
 
@@ -82,27 +77,32 @@ class ShoppingView {
 	redrawTable(items){
 		let rowCount = 0;
 
-		let table = document.getElementById("itemList");
-		let newRow = document.createElement("tr");
+		let tableBody = document.getElementById("listPlacement");
+		// tableBody.innerHTML = ""
+		// console.log(tableBody)
 
-		for (let item in items) {
-			checkBox = document.createElement("input")
+
+		for (let item of items.newItems) {
+
+			let newRow = document.createElement("tr");
+			let checkbox = document.createElement("input")
 			checkbox.type = "checkbox"
 			checkbox.onclick = checked(); // Parentheses or no?
 			newRow.appendChild(checkbox)
-			for (let info in [item.name, item.store, item.section, item.qty, item.price]) {
-				newCell = document.createElement("td")
+
+			
+			for (let info of [item._name, item._store, item._section, item._qty, item._price]) {
+				let newCell = document.createElement("td")
 				newCell.innerHTML = info;
 				newRow.appendChild(newCell)
 				
 				// Changing Color of Each Item
 				//newRow.style.backgroundColor = item.priority
 			}
-			
+			tableBody.appendChild(newRow)
+			owCount++;
 		}
-
-		table.appendChild(newRow)
-		rowCount++;
+		
 	}
 }
 

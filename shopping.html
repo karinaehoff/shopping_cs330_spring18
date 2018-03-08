@@ -19,7 +19,7 @@
 		
 	</head>
 
-	<body>
+	<body onload="displayStores()">
 
 		<!-- Navigation Bar -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -64,7 +64,8 @@
 			</div>
 			<div class="col">
 				<p>Quantity:
-					<select id=qty>
+					<select id=qty selected=" ">
+						<option label=" "></option>
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -86,22 +87,20 @@
 		  <div class="row">
 		    <div class="col">
 		      <p>Store:
-				<select id="store">
-					<option value="grocery">Grocery</option>
-					<option value="hardware">Hardware</option>
-					<option value="bookstore">Book Store</option>
+				<select id="store" onclick="displaySections()">
+					<option label=" "></option>
 				</select></p>
 		    </div>
 		    <div class="col">
 		      <p>Section
-				<select id="section">
-					<option value="produce">Produce</option>
-					<option value="housewares">Housewares</option>
+				<select id="section" required="required">
+					<option label=" "></option>
 				</select></p>
 		    </div>
 		    <div class="col">
 		      <p>Priority
 		      <select id="priority">
+		      		<option label=" "></option>
 					<option value="low">Low</option>
 					<option value="medium">Medium</option>
 					<option value="high">High</option>
@@ -141,7 +140,7 @@
 					</tr>
 				</thead>
 
-				<tbody>
+				<tbody id=listPlacement>
 					<!-- Main Content - values added through script.js & user input-->
 				</tbody>
 
@@ -152,9 +151,9 @@
 		</div> <!-- end of shoppingList -->
 
 		
-		<script type="text/javascript" src="js/model.js?=x5"></script>
-		<script type="text/javascript" src="js/view.js?=x5"></script>
-		<script type="text/javascript" src="js/controller.js?=x5"></script>
+		<script type="text/javascript" src="js/model.js?=x14"></script>
+		<script type="text/javascript" src="js/view.js?=x14"></script>
+		<script type="text/javascript" src="js/controller.js?=x14"></script>
 	</body>
 	
 </html>

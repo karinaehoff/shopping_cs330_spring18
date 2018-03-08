@@ -108,33 +108,32 @@ class Item {
 }
 
 class ShoppingList extends Subject {
-	constructor() {
+	constructor(array) {
 		super()
 		this.newItems = [];
 		this.oldItems = [];
-		this.itemList = array;
+		this._itemList = array;
 	}
 
 	get itemList() {
-		return this.itemList;
+		return this._itemList;
 	}
 
 	set itemList(array) {
-		this.itemList = array;
+		this._itemList = array;
 	}
 
 	addItem(item) {
-		this.itemList.push(item);
-		//call publish?
+		this._itemList.push(item);
 		this.publish('newitem', this)
 	}
 
 	removeItem(item) {
-		for (let thing in this.itemList) {
+		for (let thing in this._itemList) {
 			if (thing == item) {
 				index = thing.index
 			}
 		}
-		this.itemList.splice(index, 1);
+		this._itemList.splice(index, 1);
 	}
 }
