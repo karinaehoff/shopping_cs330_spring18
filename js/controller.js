@@ -7,6 +7,7 @@
 
 // Global Instance of Shopping List
 var shoppingModel = new ShoppingList([]);
+localStorage.shoppingModel = shoppingModel;
 
 // Create View object (subscribes to shoppingList)
 var view = new ShoppingView(shoppingModel);
@@ -86,21 +87,29 @@ function displaySections() {
 
 
 // add a strikethrough option when the checkbox is clicked for a row
-function checked(row) {
-	row.style.
-	let parent = element.parentElement
-	parent.nodeName
-
-	if (element.checked) {
-		parent.class = "strikethrough"
+function checked(cb, row) {
+	if (cb.checked) {
+		alert(cb)
+		alert("CHECK!")
+		row.style.backgroundColor = "#808080"
 	} else {
-		parent.class = "";
+		alert("element added")
 	}
-	
+	// setTimeout(disappear(row), 5000)
 	
 }
 
-// then disappear after a few second
-// Use timer to wait a few seconds to do:
-//    remove item from shoppingModel
-//    view.redrawTable(shoppingModel)
+
+function disappear(row) {
+	shoppingModel.removeItem(row)
+	view.redrawTable(shoppingModel)
+	row.style.display = "none"
+}
+
+// Function for sorting the list by column by clicking on the head
+function order(element) {
+	console.log(element)
+	// Take ShoppingModel
+	// Sort by the specified column
+	// Redraw Table
+}
