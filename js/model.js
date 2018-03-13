@@ -38,7 +38,7 @@ class Subject {
 
 class Item {
 	constructor(self, name, store, section, qty, price, priority) {
-		
+
 		this._name = name;
 		this._store = store;
 		this._section = section;

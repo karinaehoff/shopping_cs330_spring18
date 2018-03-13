@@ -36,11 +36,12 @@ class ShoppingView {
 		for (let item of shoppingList._itemList) {
 			this.addRow(item, tableBody)
 		}
-		
+
 	}
 
 	addRow(item, parent) {
 		let row = document.createElement("tr")
+		row.classList.add("tableRow")
 		if (item.priority == "low") {
 					row.style.backgroundColor = "#d9f2d9"
 				} else if (item.priority == "medium") {
@@ -80,17 +81,17 @@ class ShoppingView {
 			checkbox.onclick = checked(); // Parentheses or no?
 			newRow.appendChild(checkbox)
 
-			
+
 			for (let info of [item._name, item._store, item._section, item._qty, item._price]) {
 				let newCell = document.createElement("td")
 				newCell.innerHTML = info;
 				newRow.appendChild(newCell)
-				
+
 			}
 
 			tableBody.appendChild(newRow)
 			owCount++;
 		}
-		
+
 	}
 }

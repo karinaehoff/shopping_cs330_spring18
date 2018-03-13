@@ -16,7 +16,7 @@
 		<!-- Original Style Sheet -->
 		<!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		
+
 	</head>
 
 	<body onload="displayStores()">
@@ -128,15 +128,15 @@
 
 		<!-- Shopping List -->
 		<div id=shoppingList>
-			<table id=itemList class="mx-auto" style="width:80%;">
+			<table id=itemList class="mx-auto sortable" style="width:80%;">
 				<thead>
 					<tr>
 						<th></th> <!-- This is to format for the check box for each row -->
-						<th scope="col" id="itemHead" onclick="order(this.id)">Item</th>
-						<th scope="col" id="qtyHead" onclick="order(this.id)">Quantity</th>
-						<th scope="col" id="storeHead" onclick="order(this.id)">Store</th>
-						<th scope="col" id="sectionHead" onclick="order(this.id)">Section</th>
-						<th scope="col" id="priceHead" onclick="order(this.id)">Price</th>
+						<th scope="col" id="itemHead" data-sort="name" onclick="order(this.id)">Item</th>
+						<th scope="col" id="storeHead" data-sort="name" onclick="order(this.id)">Store</th>
+						<th scope="col" id="sectionHead" data-sort="name" onclick="order(this.id)">Section</th>
+						<th scope="col" id="qtyHead" data-sort="name" onclick="order(this.id)">Quantity</th>
+					  <th scope="col" id="priceHead" data-sort="name" onclick="order(this.id)">Price</th>
 					</tr>
 				</thead>
 
@@ -150,10 +150,10 @@
 			</table>
 		</div> <!-- end of shoppingList -->
 
-		
+
 		<script type="text/javascript" src="js/model.js?=x18"></script>
 		<script type="text/javascript" src="js/view.js?=x18"></script>
 		<script type="text/javascript" src="js/controller.js?=x18"></script>
 	</body>
-	
+
 </html>

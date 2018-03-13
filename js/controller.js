@@ -91,11 +91,12 @@ function checked(cb, row) {
 		alert(cb)
 		alert("CHECK!")
 		row.style.backgroundColor = "#808080"
+		row.style.textD
 	} else {
-		alert("element added")
+		// alert("element added")
 	}
 	// setTimeout(disappear(row), 5000)
-	
+
 }
 
 function disappear(row) {
@@ -106,14 +107,73 @@ function disappear(row) {
 
 // Function for sorting the list by column by clicking on the head
 function order(element) {
-	console.log(element)
+	//Put each row in the table body into an array called rows
+	// let table = document.getElementById("listPlacement")
+	// let rows = document.getElementsByClassName('tableRow');
+	// console.log(rows)
 
-	// Take ShoppingModel
-	let itemList = shoppingModel._itemList
-
-	for (let item of itemList) {
-		console.log(item)
+	// console.log(element)
+	//
+	// // Take ShoppingModel
+	let oldItemList = shoppingModel.itemList;
+	// let newItemList = [];
+	//
+	for (let item of oldItemList) {
+		console.log(item);
 	}
-	// Sort by the specified column
+
+	// // Sort by the specified column
+	// let colId2itemAttr = {"itemHead":"name",
+	// 				  	  "qtyHead":"qty",
+	// 				  	  "storeHead":"store",
+	// 				  	  "sectionHead":"section",
+	// 				  	  "priceHead":"price"};
+  // let identifier = colId2itemAttr[element];
+	//
+  // console.log(identifier)
+
 	// Redraw Table
+	// shoppingModel.itemList(itemList)
 }
+
+// Jon Duckett's Method (Reference Book)
+// var compare = {
+// 	name: function(a,b) {
+// 		if (a < b) {
+// 			return -1;
+// 		} else {
+// 			return a > b ? 1 : 0;
+// 		}
+// 	}
+// };
+
+// $('.sortable').each(function() {
+// 	var table = $(this);
+// 	var $tbody = $table.find('tbody');
+// 	var $controls = $table.find('th');
+// 	var rows = $tbody.find('tr').toArray();
+//
+// 	$controls.on('click', function() {
+// 		var $header = $(this);
+// 		var order = $header.data('sort');
+// 		var column;
+//
+// 		if ($header.is('.ascending') || $header.is('.descending')) {
+// 			$header.toggleClass('ascending descending');
+// 			$tbody.append(rows.reverse());
+// 		} else {
+// 			$header.addClass('ascending');
+// 			$header.siblings().removeClass('ascending descending');
+// 			if (compare.hasOwnProperty(order)) {
+// 				column = $controls.index(this);
+//
+// 				rows.sort(function(a,b) {
+// 					a = $(a).find('td').eq(column).text()
+// 					b = $(b).find('td').eq(column).text()
+// 					return compare[order](a, b);
+// 				});
+// 			}
+// 		}
+// 	});
+// });
+// END of Jon Duckett's Method (Reference Book)
