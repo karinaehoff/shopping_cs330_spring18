@@ -85,7 +85,6 @@ function displaySections() {
 	}
 }
 
-
 // add a strikethrough option when the checkbox is clicked for a row
 function checked(cb, row) {
 	if (cb.checked) {
@@ -99,7 +98,6 @@ function checked(cb, row) {
 	
 }
 
-
 function disappear(row) {
 	shoppingModel.removeItem(row)
 	view.redrawTable(shoppingModel)
@@ -109,7 +107,13 @@ function disappear(row) {
 // Function for sorting the list by column by clicking on the head
 function order(element) {
 	console.log(element)
+
 	// Take ShoppingModel
+	let itemList = shoppingModel._itemList
+
+	for (let item of itemList) {
+		console.log(item)
+	}
 	// Sort by the specified column
 	// Redraw Table
 }
