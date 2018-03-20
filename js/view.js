@@ -23,15 +23,28 @@ class ViewThing {
 
 class ShoppingView {
 
-	// ***Class Code from here
+	// Refined in class based on Dr. Miller's example
 	constructor(model) {
 		// The bind() method creates a new function
 		model.subscribe(this.redrawList.bind(this))
+		// Is this all that is needed for a:
+		// "working publish/subscribe interface between model and view"?
 	}
 
 	redrawList(shoppingList, msg) {
 		let tableBody = document.getElementById("listPlacement")
 		tableBody.innerHTML = ""
+
+		let savedList = JSON.stringify(window.localStorage.getItem("model"))
+
+		console.log(savedList)
+
+		//Convert from generic js objects into items?
+		for (let jsItem of savedList) {
+			console.log(jsItem)
+			let newItem = new Item(jsItem)
+			console.log(newItem)
+		}
 
 		for (let item of shoppingList._itemList) {
 			this.addRow(item, tableBody)
@@ -51,8 +64,8 @@ class ShoppingView {
 				}
 		let cb = document.createElement("input")
 		cb.type = "checkbox"
-		cb.value = "unchecked"
-		cb.onclick = checked(this, row)
+		// cb.value = "unchecked"
+		// cb.onclick = checked(item)
 		row.appendChild(cb)
 
 		for (let val of ['name', 'store', 'section', 'qty', 'price']) {
@@ -60,9 +73,12 @@ class ShoppingView {
 			td.innerHTML = item[val]
 			row.appendChild(td)
 		}
+		if (item.purchased){
+			row.style.backgroundColor = "gray"
+			//text decoration or borders for strikethrough?
+		}
 		parent.appendChild(row)
 	}
-	// to here***
 
 	// RedrawTable callback function for when the shopping list changes
 	redrawTable(items){
@@ -90,7 +106,7 @@ class ShoppingView {
 			}
 
 			tableBody.appendChild(newRow)
-			owCount++;
+			rowCount++;
 		}
 
 	}

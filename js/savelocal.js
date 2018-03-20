@@ -2,11 +2,11 @@
 
 "use strict"
 class LocalStorageSaver {
-  constructor(model, lsname) {
-    this.lsname = lsname;
+  constructor(model, listName) {
+    this.lsname = listName;
     let self = this
-    model.subscribe(function(slist, msg) {
-      self.saveAll(slist)
+    model.subscribe(function(savedList, msg) {
+      self.saveAll(savedList)
     })
     // now restore from localStorage
     let restore_list = JSON.parse(localStorage.get)

@@ -7,10 +7,14 @@
 
 // Global Instance of Shopping List
 var shoppingModel = new ShoppingList([]);
-localStorage.shoppingModel = shoppingModel;
+// localStorage.setItem("model", shoppingModel);
+var listSaver = new LocalStorageSaver(shoppingModel, "karislst");
 
 // Create View object (subscribes to shoppingList)
 var view = new ShoppingView(shoppingModel);
+
+// Create a database object - Written by Dr. Miller
+// var myDB = new LocalStorageSaver(shoppingModel, "karislst")
 
 var stores = ["Dragonfly",  "Fareway", "Fleet Farm", "Walmart"]
 
@@ -58,6 +62,11 @@ function clickedOn() {
 
 }
 
+function loadSaved() {
+	window.localStorage.setItem(JSON.stringify("model"))
+	// view.redrawTable(window.localStorage.getItem("model"))
+}
+
 function displayStores() {
 	let selectTag = document.getElementById("store")
 	for (let store of stores) {
@@ -86,51 +95,46 @@ function displaySections() {
 }
 
 // add a strikethrough option when the checkbox is clicked for a row
-function checked(cb, row) {
-	if (cb.checked) {
-		alert(cb)
-		alert("CHECK!")
-		row.style.backgroundColor = "#808080"
-		row.style.textD
-	} else {
-		// alert("element added")
-	}
-	// setTimeout(disappear(row), 5000)
+function checked(item, row) {
+	// Change to rely on the purchased attribute & redraw the table!
+	item.purchased(true)
+	setTimeout(disappear(row), 5000)
 
 }
 
 function disappear(row) {
 	shoppingModel.removeItem(row)
 	view.redrawTable(shoppingModel)
-	row.style.display = "none"
+	// row.style.display = "none" //?
 }
 
 // Function for sorting the list by column by clicking on the head
-function order(element) {
+function order(specifier) {
+
 	//Put each row in the table body into an array called rows
 	// let table = document.getElementById("listPlacement")
 	// let rows = document.getElementsByClassName('tableRow');
 	// console.log(rows)
 
-	// console.log(element)
-	//
-	// // Take ShoppingModel
+	console.log(specifier)
+
+	// Take ShoppingModel
 	let oldItemList = shoppingModel.itemList;
-	// let newItemList = [];
+	let newItemList = oldItemList.sort();
 	//
 	for (let item of oldItemList) {
 		console.log(item);
 	}
 
-	// // Sort by the specified column
-	// let colId2itemAttr = {"itemHead":"name",
-	// 				  	  "qtyHead":"qty",
-	// 				  	  "storeHead":"store",
-	// 				  	  "sectionHead":"section",
-	// 				  	  "priceHead":"price"};
-  // let identifier = colId2itemAttr[element];
-	//
-  // console.log(identifier)
+	// Sort by the specified column
+	let colId2itemAttr = {"itemHead":"name",
+					  	  "qtyHead":"qty",
+					  	  "storeHead":"store",
+					  	  "sectionHead":"section",
+					  	  "priceHead":"price"};
+  let identifier = colId2itemAttr[specifier];
+
+  console.log(identifier)
 
 	// Redraw Table
 	// shoppingModel.itemList(itemList)

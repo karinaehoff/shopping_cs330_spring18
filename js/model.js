@@ -128,10 +128,10 @@ class ShoppingList extends Subject {
 		this.publish('newitem', this)
 	}
 
-	removeItem(item) {
-		for (let thing in this._itemList) {
-			if (thing == item) {
-				index = thing.index
+	removeItem(itemToRemove) {
+		for (let listItem in this._itemList) {
+			if (listItem == itemToRemove) {
+				index = listItem.index
 			}
 		}
 		this._itemList.splice(index, 1);
