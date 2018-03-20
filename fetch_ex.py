@@ -13,8 +13,9 @@ def getnum(): #this function can be anyname; does not have to match URL
 	res.headers['Content-type'] = 'application/json'
 	return res
 
-@app.route('/hello')
+@app.route('/')
 def hello():
 	return "<h1>Hello World</h1>"
 
-app.run(debug=True, port=8000) #original port: 5001
+if __name__ == "__main__":
+	app.run(debug=True, port=5001)

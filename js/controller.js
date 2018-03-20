@@ -62,10 +62,10 @@ function clickedOn() {
 
 }
 
-function loadSaved() {
-	window.localStorage.setItem(JSON.stringify("model"))
-	// view.redrawTable(window.localStorage.getItem("model"))
-}
+// function loadSaved() {
+// 	window.localStorage.setItem(JSON.stringify("model"))
+// 	// view.redrawTable(window.localStorage.getItem("model"))
+// }
 
 function displayStores() {
 	let selectTag = document.getElementById("store")
@@ -120,11 +120,12 @@ function order(specifier) {
 
 	// Take ShoppingModel
 	let oldItemList = shoppingModel.itemList;
-	let newItemList = oldItemList.sort();
+	// let newItemList = oldItemList.sort();
+	let newItemList = [];
 	//
-	for (let item of oldItemList) {
-		console.log(item);
-	}
+	// for (let item of oldItemList) {
+	// 	console.log(item);
+	// }
 
 	// Sort by the specified column
 	let colId2itemAttr = {"itemHead":"name",
@@ -133,6 +134,12 @@ function order(specifier) {
 					  	  "sectionHead":"section",
 					  	  "priceHead":"price"};
   let identifier = colId2itemAttr[specifier];
+	let ident2row = {}
+	for (let item of oldItemList) {
+		indent2row[item.identifier] = item
+	}
+
+
 
   console.log(identifier)
 

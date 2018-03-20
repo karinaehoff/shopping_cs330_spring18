@@ -1,0 +1,54 @@
+<!-- Class Notes 20 March 2018 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <title>Document</title>
+  </head>
+  <body>
+    <input type=text id=num1></input>
+    <input type=text id=num2></input>
+    <input type=text id=num3></input>
+    <input type=text id=num4></input>
+    <button onclick="addNumbers()">Add Numbers</button>
+    <p id="displayAnswer"></p>
+
+    <script>
+      function addNumbers() {
+          let config = {};
+          let n1 = document.getElementById('num1').value
+          let n2 = document.getElementById('num2').value
+          let n3 = document.getElementById('num3').value
+          let n4 = document.getElementById('num4').value
+
+          config.method = 'POST'
+          config.body = JSON.stringify({num1: n1, num2:n2}) //must match content type
+          config.headers = {'Content-Type': 'application/json',
+                            'Accept': 'application/json'}
+
+          fetch("http://localhost:5001/addtwo?num1=1&num2=2")
+          .then(function(response) {
+            console.log(response)
+            return response.json()
+          })
+            .then(function(json) {return fetch(`/addtwo?num1=${json}&num2=${n3}`) })
+            .then(function(response) {
+              console.log(response)
+              return response.json()
+            })
+              .then(function(json) {return fetch(`/addtwo?num1=${json}&num2=${n4}`) })
+              .then(function(response) {
+                console.log(response)
+                return response.json()
+              })
+        .catch(error => console.error('Error: ', error))
+        .then(function(myJson) {
+          document.getElementById("displayAnswer").innerHTML = myJson;
+        })
+      }
+
+    </script>
+  </body>
+</html>
+<!-- Get or post - when using post, must use configuration (config) object - HAVE to use Post for shopping list app -->
+<!-- Use JSON.stringify({num1: n1, num2: n2}) //must match content type -->

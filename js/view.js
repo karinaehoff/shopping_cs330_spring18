@@ -5,7 +5,7 @@
 
 "use strict"
 
-// Written & provided by Dr. Miller
+// class ViewThing Written & provided by Dr. Miller
 class ViewThing {
 	constructor(m) {
 		m.subscribe(this.redrawList)
@@ -35,12 +35,12 @@ class ShoppingView {
 		let tableBody = document.getElementById("listPlacement")
 		tableBody.innerHTML = ""
 
-		let savedList = JSON.stringify(window.localStorage.getItem("model"))
+		// let savedList = JSON.stringify(window.localStorage.getItem("model"))
 
-		console.log(savedList)
+		console.log(listSaver)
 
 		//Convert from generic js objects into items?
-		for (let jsItem of savedList) {
+		for (let jsItem of listSaver) {
 			console.log(jsItem)
 			let newItem = new Item(jsItem)
 			console.log(newItem)
