@@ -5,10 +5,8 @@
 
 "use strict"
 
-// Global Instance of Shopping List
 var shoppingModel = new ShoppingList([]);
-// localStorage.setItem("model", shoppingModel);
-var listSaver = new LocalStorageSaver(shoppingModel, "karislst");
+var listSaver = new LocalStorageSaver(shoppingModel, "shoppingList");
 
 // Create View object (subscribes to shoppingList)
 var view = new ShoppingView(shoppingModel);
@@ -29,7 +27,7 @@ let itemNum = 1;
 function clickedOn() {
 
 	// Dr. Miller's (Much Cleaner) Approach
-	// let rolColIds = ["product", "store", "section", "qty", "price", "priority"]
+	// let rolColIds = ["productName", "store", "section", "qty", "price", "priority"]
 	// let vals = {}
 	// for (let cId in rowColIds) {
 	// 	vals[cId] = document.getElementById(cId).value
@@ -56,16 +54,19 @@ function clickedOn() {
 
 	// Call shoppingList addItem method & clear input fields
 	shoppingModel.addItem(newItem);
+	// WRITE TO LocalStorageSaver
+	view.redrawTable()
 	for (let ref of [product, store, section, qty, price, priority]) {
 		ref.value = ""
 	}
 
 }
 
-// function loadSaved() {
-// 	window.localStorage.setItem(JSON.stringify("model"))
-// 	// view.redrawTable(window.localStorage.getItem("model"))
-// }
+function loadSaved() {
+	// 	window.localStorage.setItem(JSON.stringify("model"))
+	// view.redrawTable(window.localStorage.getItem("model"))
+
+}
 
 function displayStores() {
 	let selectTag = document.getElementById("store")
@@ -87,6 +88,7 @@ function displaySections() {
 	sectionSelect.innerHTML = ""
 
 	for (let section of sectionList) {
+
 		let option = document.createElement("option")
 		option.value = section
 		option.innerHTML = section
@@ -96,10 +98,15 @@ function displaySections() {
 
 // add a strikethrough option when the checkbox is clicked for a row
 function checked(item, row) {
+	// console.log(item)
 	// Change to rely on the purchased attribute & redraw the table!
-	item.purchased(true)
+	// item._purchased = true
 	setTimeout(disappear(row), 5000)
 
+}
+
+function unchecked(item, row) {
+	item.checked = false;
 }
 
 function disappear(row) {
@@ -116,7 +123,7 @@ function order(specifier) {
 	// let rows = document.getElementsByClassName('tableRow');
 	// console.log(rows)
 
-	console.log(specifier)
+	// console.log(specifier)
 
 	// Take ShoppingModel
 	let oldItemList = shoppingModel.itemList;
@@ -141,7 +148,7 @@ function order(specifier) {
 
 
 
-  console.log(identifier)
+  // console.log(identifier)
 
 	// Redraw Table
 	// shoppingModel.itemList(itemList)

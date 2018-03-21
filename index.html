@@ -22,7 +22,7 @@
 
 	</head>
 
-	<body onload="displayStores()">
+	<body>
 
 		<!-- Navigation Bar -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -127,7 +127,7 @@
 		</p> -->
 
 				<div class="mx-auto" style="width:200px;"> <!-- class="center"> -->
-					<button type="button" id=addItemButton onclick="clickedOn()">Add Item</button>
+					<button type="button" id="addItemButton" onclick="clickedOn()">Add Item</button>
 				</div> <!-- End of center div -->
 			</fieldset>
 
@@ -157,12 +157,17 @@
 			</table>
 		</div> <!-- end of shoppingList -->
 
-
 		<script type="text/javascript" src="js/model.js?=x18"></script>
 		<script type="text/javascript" src="js/view.js?=x18"></script>
-
 		<script type="text/javascript" src="js/savelocal.js?=x18"></script>
 		<script type="text/javascript" src="js/controller.js?=x18"></script>
+		<script>
+			window.onload = function() {
+				alert("HEY")
+				displayStores()
+				view.redrawTable(shoppingModel)
+			}
+		</script>
 	</body>
 
 </html>

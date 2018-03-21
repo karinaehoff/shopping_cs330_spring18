@@ -6,50 +6,23 @@
 "use strict"
 
 // class ViewThing Written & provided by Dr. Miller
-class ViewThing {
-	constructor(m) {
-		m.subscribe(this.redrawList)
-	}
-
-	redrawList(scope, msg) {
-		console.log("redrawing")
-		console.log(scope.volume())
-	}
-}
-
-// Display HTML
-//  1. Erase Table
-//  2. Redraw from scratch
+// class ViewThing {
+// 	constructor(m) {
+// 		m.subscribe(this.redrawList)
+// 	}
+//
+// 	redrawList(scope, msg) {
+// 		console.log("redrawing")
+// 		console.log(scope.volume())
+// 	}
+// }
 
 class ShoppingView {
 
 	// Refined in class based on Dr. Miller's example
 	constructor(model) {
 		// The bind() method creates a new function
-		model.subscribe(this.redrawList.bind(this))
-		// Is this all that is needed for a:
-		// "working publish/subscribe interface between model and view"?
-	}
-
-	redrawList(shoppingList, msg) {
-		let tableBody = document.getElementById("listPlacement")
-		tableBody.innerHTML = ""
-
-		// let savedList = JSON.stringify(window.localStorage.getItem("model"))
-
-		console.log(listSaver)
-
-		//Convert from generic js objects into items?
-		for (let jsItem of listSaver) {
-			console.log(jsItem)
-			let newItem = new Item(jsItem)
-			console.log(newItem)
-		}
-
-		for (let item of shoppingList._itemList) {
-			this.addRow(item, tableBody)
-		}
-
+		model.subscribe(this.redrawTable.bind(this))
 	}
 
 	addRow(item, parent) {
@@ -64,8 +37,8 @@ class ShoppingView {
 				}
 		let cb = document.createElement("input")
 		cb.type = "checkbox"
-		// cb.value = "unchecked"
-		// cb.onclick = checked(item)
+		cb.value = "unchecked"
+		cb.onClick = checked(item)
 		row.appendChild(cb)
 
 		for (let val of ['name', 'store', 'section', 'qty', 'price']) {
@@ -73,41 +46,44 @@ class ShoppingView {
 			td.innerHTML = item[val]
 			row.appendChild(td)
 		}
-		if (item.purchased){
+		console.log(item)
+		if (item._purchased) {
+			console.log(item._purchased)
 			row.style.backgroundColor = "gray"
-			//text decoration or borders for strikethrough?
 		}
 		parent.appendChild(row)
 	}
 
 	// RedrawTable callback function for when the shopping list changes
-	redrawTable(items){
-		let rowCount = 0;
+	redrawTable(shoppingList){
 
 		let tableBody = document.getElementById("listPlacement");
-		// tableBody.innerHTML = ""
+		tableBody.innerHTML = ""
 		// console.log(tableBody)
 
+		// console.log("ListSaver:",listSaver)
+		// this.addRow()
+		// for (let item of shoppingList._itemList) { // WRONG
+		// 	this.addRow(item, tableBody)
 
-		for (let item of items.newItems) {
+		// for (let item of items.newItems) {
+		//
+		// 	let newRow = document.createElement("tr");
+		// 	let checkbox = document.createElement("input")
+		// 	checkbox.type = "checkbox"
+		// 	checkbox.onclick = checked(this, this.parent); // Parentheses or no?
+		// 	console.log("Checkbox:", checkbox)
+		// 	newRow.appendChild(checkbox)
 
-			let newRow = document.createElement("tr");
-			let checkbox = document.createElement("input")
-			checkbox.type = "checkbox"
-			checkbox.onclick = checked(); // Parentheses or no?
-			newRow.appendChild(checkbox)
+			// for (let info of [item._name, item._store, item._section, item._qty, item._price]) {
+			// 	let newCell = document.createElement("td")
+			// 	newCell.innerHTML = info;
+			// 	newRow.appendChild(newCell)
+			//
+			// }
 
-
-			for (let info of [item._name, item._store, item._section, item._qty, item._price]) {
-				let newCell = document.createElement("td")
-				newCell.innerHTML = info;
-				newRow.appendChild(newCell)
-
-			}
-
-			tableBody.appendChild(newRow)
-			rowCount++;
-		}
+			// tableBody.appendChild(newRow)
+		// }
 
 	}
 }

@@ -11,7 +11,7 @@
     <input type=text id=num3></input>
     <input type=text id=num4></input>
     <button onclick="addNumbers()">Add Numbers</button>
-    <p id="displayAnswer"></p>
+    <h1 id="displayAnswer"></h1>
 
     <script>
       function addNumbers() {
@@ -26,7 +26,7 @@
           config.headers = {'Content-Type': 'application/json',
                             'Accept': 'application/json'}
 
-          fetch("http://localhost:5001/addtwo?num1=1&num2=2")
+          fetch(`http://localhost:5001/addtwo?num1=${n1}&num2=${n2}`)
           .then(function(response) {
             console.log(response)
             return response.json()

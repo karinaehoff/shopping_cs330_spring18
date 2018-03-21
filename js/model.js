@@ -129,6 +129,7 @@ class ShoppingList extends Subject {
 	}
 
 	removeItem(itemToRemove) {
+		let index;
 		for (let listItem in this._itemList) {
 			if (listItem == itemToRemove) {
 				index = listItem.index
