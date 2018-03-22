@@ -13,8 +13,7 @@
 			content="A Shopping List Application" />
 		<meta http-equiv="author"
 			content="Kari Hoff" />
-		<!-- Original Style Sheet -->
-		<!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
+		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link rel="stylesheet"
 					href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 					integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -126,8 +125,10 @@
 			<label for="high">High</label>
 		</p> -->
 
-				<div class="mx-auto" style="width:200px;"> <!-- class="center"> -->
+				<div class="mx-auto" style="width:500px;"> <!-- class="center"> -->
 					<button type="button" id="addItemButton" onclick="clickedOn()">Add Item</button>
+					<button type="button" id="sortByPriority" onclick="sortPriort()">Sort By Priority</button>
+					<button type="button" id="deleteListButton" onclick="deleteList()">Delete List</button>
 				</div> <!-- End of center div -->
 			</fieldset>
 
@@ -139,11 +140,11 @@
 				<thead>
 					<tr>
 						<th></th> <!-- This is to format for the check box for each row -->
-						<th scope="col" id="itemHead" data-sort="name" onclick="order(this.id)">Item</th>
-						<th scope="col" id="storeHead" data-sort="name" onclick="order(this.id)">Store</th>
-						<th scope="col" id="sectionHead" data-sort="name" onclick="order(this.id)">Section</th>
-						<th scope="col" id="qtyHead" data-sort="name" onclick="order(this.id)">Quantity</th>
-					  <th scope="col" id="priceHead" data-sort="name" onclick="order(this.id)">Price</th>
+						<th scope="col" id="itemHead" data-sort="name" data-toggle="tooltip" title="Sort by Name" onclick="order(this.id)">Item</th>
+						<th scope="col" id="storeHead" data-sort="name" data-toggle="tooltip" title="Sort by Store" onclick="order(this.id)">Store</th>
+						<th scope="col" id="sectionHead" data-sort="name" data-toggle="tooltip" title="Sort by Section" onclick="order(this.id)">Section</th>
+						<th scope="col" id="qtyHead" data-sort="name" data-toggle="tooltip" title="Sort by Quantity" onclick="order(this.id)">Quantity</th>
+					  <th scope="col" id="priceHead" data-sort="name" data-toggle="tooltip" title="Sort by Price" onclick="order(this.id)">Price</th>
 					</tr>
 				</thead>
 
@@ -163,7 +164,7 @@
 		<script type="text/javascript" src="js/controller.js?=x18"></script>
 		<script>
 			window.onload = function() {
-				alert("HEY")
+				// alert("Welcome to the Shopping List!")
 				displayStores()
 				view.redrawTable(shoppingModel)
 			}

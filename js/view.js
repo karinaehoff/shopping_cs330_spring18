@@ -19,7 +19,6 @@
 
 class ShoppingView {
 
-	// Refined in class based on Dr. Miller's example
 	constructor(model) {
 		// The bind() method creates a new function
 		model.subscribe(this.redrawTable.bind(this))
@@ -32,13 +31,15 @@ class ShoppingView {
 					row.style.backgroundColor = "#d9f2d9"
 				} else if (item.priority == "medium") {
 					row.style.backgroundColor = "#f2f2d9"
-				} else {
+				} else if (item.priority == "high") {
 					row.style.backgroundColor = "#f2d9d9"
+				} else {
+					row.style.backgroundColor = "#f2f2f2"
 				}
 		let cb = document.createElement("input")
 		cb.type = "checkbox"
 		cb.value = "unchecked"
-		cb.onClick = checked(item)
+		// cb.click = checked(cb, item, row)
 		row.appendChild(cb)
 
 		for (let val of ['name', 'store', 'section', 'qty', 'price']) {
@@ -46,16 +47,15 @@ class ShoppingView {
 			td.innerHTML = item[val]
 			row.appendChild(td)
 		}
-		console.log(item)
-		if (item._purchased) {
-			console.log(item._purchased)
+		if (item.purchased) {
+			console.log(item.purchased)
 			row.style.backgroundColor = "gray"
 		}
 		parent.appendChild(row)
 	}
 
 	// RedrawTable callback function for when the shopping list changes
-	redrawTable(shoppingList){
+	redrawTable(shoppingList) {
 
 		let tableBody = document.getElementById("listPlacement");
 		tableBody.innerHTML = ""
@@ -63,8 +63,11 @@ class ShoppingView {
 
 		// console.log("ListSaver:",listSaver)
 		// this.addRow()
-		// for (let item of shoppingList._itemList) { // WRONG
-		// 	this.addRow(item, tableBody)
+		if (shoppingList.itemList) {
+			for (let item of shoppingList.itemList) { // WRONG
+				this.addRow(item, tableBody)
+			}
+		}
 
 		// for (let item of items.newItems) {
 		//
@@ -83,7 +86,6 @@ class ShoppingView {
 			// }
 
 			// tableBody.appendChild(newRow)
-		// }
 
 	}
 }

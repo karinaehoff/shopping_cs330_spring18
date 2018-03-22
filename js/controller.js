@@ -8,11 +8,10 @@
 var shoppingModel = new ShoppingList([]);
 var listSaver = new LocalStorageSaver(shoppingModel, "shoppingList");
 
-// Create View object (subscribes to shoppingList)
-var view = new ShoppingView(shoppingModel);
-
 // Create a database object - Written by Dr. Miller
 // var myDB = new LocalStorageSaver(shoppingModel, "karislst")
+
+var view = new ShoppingView(shoppingModel);
 
 var stores = ["Dragonfly",  "Fareway", "Fleet Farm", "Walmart"]
 
@@ -21,17 +20,10 @@ var sections = {"Dragonfly":["Fiction", "Nonfiction"],
 				"Fleet Farm":["Housewares", "Clothing", "Pets"],
 				"Walmart":["Electronics", "Pharmacy", "Food"]}
 
-let itemNum = 1;
+// let itemNum = 1;
 
 // Called when add button is clicked
 function clickedOn() {
-
-	// Dr. Miller's (Much Cleaner) Approach
-	// let rolColIds = ["productName", "store", "section", "qty", "price", "priority"]
-	// let vals = {}
-	// for (let cId in rowColIds) {
-	// 	vals[cId] = document.getElementById(cId).value
-	// }
 
 	// Elements
 	let product = document.getElementById("productName")
@@ -54,18 +46,18 @@ function clickedOn() {
 
 	// Call shoppingList addItem method & clear input fields
 	shoppingModel.addItem(newItem);
-	// WRITE TO LocalStorageSaver
-	view.redrawTable()
+	view.redrawTable(shoppingModel)
+
 	for (let ref of [product, store, section, qty, price, priority]) {
 		ref.value = ""
 	}
 
 }
 
-function loadSaved() {
-	// 	window.localStorage.setItem(JSON.stringify("model"))
-	// view.redrawTable(window.localStorage.getItem("model"))
-
+function deleteList() {
+	shoppingModel = new ShoppingList([]);
+	localStorage.clear()
+	view.redrawTable(shoppingModel)
 }
 
 function displayStores() {
@@ -78,7 +70,6 @@ function displayStores() {
 	}
 }
 
-// Add selection creator (changes sections depending on the store)
 function displaySections() {
 	let storeSelect = document.getElementById("store")
 	let store = storeSelect.value
@@ -96,27 +87,28 @@ function displaySections() {
 	}
 }
 
-// add a strikethrough option when the checkbox is clicked for a row
-function checked(item, row) {
+// Delete an item & its row if the checkbox is checked
+// This has never worked and I'm at a loss to explain why
+// function checked(cb, item, row) {
+	// if (cb.checked) {
+	// 	alert("Box Checked")
+	// }
 	// console.log(item)
 	// Change to rely on the purchased attribute & redraw the table!
 	// item._purchased = true
-	setTimeout(disappear(row), 5000)
+	// setTimeout(disappear(row), 5000)
 
-}
+// }
 
-function unchecked(item, row) {
-	item.checked = false;
-}
-
-function disappear(row) {
-	shoppingModel.removeItem(row)
-	view.redrawTable(shoppingModel)
+// function disappear(row) {
+// 	shoppingModel.removeItem(row)
+// 	view.redrawTable(shoppingModel)
 	// row.style.display = "none" //?
-}
+// }
 
 // Function for sorting the list by column by clicking on the head
 function order(specifier) {
+	console.log(specifier)
 
 	//Put each row in the table body into an array called rows
 	// let table = document.getElementById("listPlacement")
@@ -126,32 +118,76 @@ function order(specifier) {
 	// console.log(specifier)
 
 	// Take ShoppingModel
-	let oldItemList = shoppingModel.itemList;
+	let oldItemList = shoppingModel._itemList;
 	// let newItemList = oldItemList.sort();
 	let newItemList = [];
-	//
-	// for (let item of oldItemList) {
-	// 	console.log(item);
-	// }
 
 	// Sort by the specified column
-	let colId2itemAttr = {"itemHead":"name",
-					  	  "qtyHead":"qty",
-					  	  "storeHead":"store",
-					  	  "sectionHead":"section",
-					  	  "priceHead":"price"};
-  let identifier = colId2itemAttr[specifier];
-	let ident2row = {}
-	for (let item of oldItemList) {
-		indent2row[item.identifier] = item
-	}
+	let columns = {"itemHead":1, "storeHead":2,
+					  	  "sectionHead":3, "qtyHead":4, "priceHead":5};
+	let index = columns[specifier]
+	console.log(index)
 
+	// previousItem = oldItemList[0];
+	// for (let item of oldItemList) {
+	//
+	// }
+	newItemList = oldItemList.sort(function (a, b) {
+		if (a[index] < b[index]) {
+			return -1;
+		}
+		if (a[index] > b[index]) {
+			return 1;
+		}
+		return 0;
+	})
 
+	// let sortingArray = []
+	// let ident2row = {}
+	// for (let item of oldItemList) {
+	// 	sortingArray.push(item.identifier)
+	// 	ident2row[item.identifier] = item
+	// }
+	// sortingArray.sort()
+	// for (let sortedId of sortingArray) {
+	// 	newItemList.push(ident2row[sortedId])
+	// }
+
+	shoppingModel._itemList = newItemList
+	view.redrawTable(shoppingModel)
 
   // console.log(identifier)
+}
 
-	// Redraw Table
-	// shoppingModel.itemList(itemList)
+function sortPriort() {
+	let undefinedPriort = [];
+	let lowPriort = [];
+	let medPriort = [];
+	let highPriort = [];
+
+	for (let item of shoppingModel._itemList) {
+		console.log(item)
+		if (item.priority == "low") {
+			lowPriort.push(item)
+		} else if (item.priority == "medium") {
+			medPriort.push(item)
+		} else if (item.priority == "high") {
+			highPriort.push(item)
+		} else {
+			undefinedPriort.push(item)
+		}
+	}
+
+	shoppingModel._itemList = []
+	let lists = [highPriort, medPriort, lowPriort, undefinedPriort]
+	for (let list of lists) {
+		for (let item of list) {
+			shoppingModel._itemList.push(item)
+		}
+	}
+
+	console.log(shoppingModel._itemList)
+	view.redrawTable(shoppingModel)
 }
 
 // Jon Duckett's Method (Reference Book)
