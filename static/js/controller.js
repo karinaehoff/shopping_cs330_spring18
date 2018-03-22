@@ -6,14 +6,9 @@
 "use strict"
 
 var shoppingModel = new ShoppingList([]);
-console.log("shoppingModel created")
 var listSaver = new LocalStorageSaver(shoppingModel, "shoppingList");
-console.log("listSaver created")
 var dbListSaver = new saveToDatabase(shoppingModel, "shoppingList")
-console.log("dbListSaver created")
 var view = new ShoppingView(shoppingModel);
-console.log("view created")
-
 
 var stores = ["Dragonfly",  "Fareway", "Fleet Farm", "Walmart"]
 
@@ -26,7 +21,6 @@ var sections = {"Dragonfly":["Fiction", "Nonfiction"],
 
 // Called when add button is clicked
 function clickedOn() {
-	console.log("ClickedOn Called")
 
 	// Elements
 	let product = document.getElementById("productName")
@@ -58,14 +52,12 @@ function clickedOn() {
 }
 
 function deleteList() {
-	console.log("deleteList Called")
 	shoppingModel = new ShoppingList([]);
 	dbListSaver = new saveToDatabase(shoppingModel, "shoppingList")
 	view.redrawTable(shoppingModel)
 }
 
 function displayStores() {
-	console.log("displayStores Called")
 	let selectTag = document.getElementById("store")
 	for (let store of stores) {
 		let option = document.createElement("option")
@@ -76,7 +68,6 @@ function displayStores() {
 }
 
 function displaySections() {
-	console.log("displaySections Called")
 	let storeSelect = document.getElementById("store")
 	let store = storeSelect.value
 	let sectionList = sections[store]
@@ -114,7 +105,6 @@ function displaySections() {
 
 // Function for sorting the list by column by clicking on the head
 function order(specifier) {
-	console.log("Order Called")
 	// console.log(specifier)
 
 	//Put each row in the table body into an array called rows
@@ -167,7 +157,6 @@ function order(specifier) {
 }
 
 function sortPriort() {
-	console.log("sortPriort Called")
 	let undefinedPriort = [];
 	let lowPriort = [];
 	let medPriort = [];

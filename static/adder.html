@@ -25,8 +25,9 @@
           config.body = JSON.stringify({num1: n1, num2:n2}) //must match content type
           config.headers = {'Content-Type': 'application/json',
                             'Accept': 'application/json'}
+          console.log(config)
 
-          fetch(`http://localhost:5001/addtwo?num1=${n1}&num2=${n2}`)
+          fetch(`/addtwo?num1=${n1}&num2=${n2}`)
           .then(function(response) {
             console.log(response)
             return response.json()
