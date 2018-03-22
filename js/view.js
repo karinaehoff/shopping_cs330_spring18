@@ -48,7 +48,7 @@ class ShoppingView {
 			row.appendChild(td)
 		}
 		if (item.purchased) {
-			console.log(item.purchased)
+			// console.log(item.purchased)
 			row.style.backgroundColor = "gray"
 		}
 		parent.appendChild(row)

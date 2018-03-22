@@ -108,7 +108,7 @@ function displaySections() {
 
 // Function for sorting the list by column by clicking on the head
 function order(specifier) {
-	console.log(specifier)
+	// console.log(specifier)
 
 	//Put each row in the table body into an array called rows
 	// let table = document.getElementById("listPlacement")
@@ -126,7 +126,7 @@ function order(specifier) {
 	let columns = {"itemHead":1, "storeHead":2,
 					  	  "sectionHead":3, "qtyHead":4, "priceHead":5};
 	let index = columns[specifier]
-	console.log(index)
+	// console.log(index)
 
 	// previousItem = oldItemList[0];
 	// for (let item of oldItemList) {
@@ -166,7 +166,7 @@ function sortPriort() {
 	let highPriort = [];
 
 	for (let item of shoppingModel._itemList) {
-		console.log(item)
+		// console.log(item)
 		if (item.priority == "low") {
 			lowPriort.push(item)
 		} else if (item.priority == "medium") {
