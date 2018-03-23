@@ -19,13 +19,15 @@ class RemoteStorageSaver {
           console.log("Restore List:", restore_list)
           console.log(typeof restore_list)
           let vari = JSON.parse(restore_list)
-          console.log(typeof vari)
+          console.log("JSON Type:", typeof vari)
           if (restore_list != null) {
               for (let values of restore_list) {
-                console.log(values)
-                let restoredList = new ShoppingList([this, values.oldItems,
+                // console.log("VALUES:", values)
+                // console.log("HANDLERS:", model.handlers)
+                let model = new ShoppingList([this, values.oldItems,
                     values.newItems, values._itemList, values.handlers])
-                console.log(restoredList)
+                //   console.log("HANDLERS:", model.handlers)
+                // console.log("Restored List:", restoredList)
                   for (let vals of restoredList._itemList) {
                     let item = new Item(this, vals._name, vals._store, vals._section,
                                         vals._qty, vals._price, vals._priority)
@@ -58,7 +60,6 @@ class RemoteStorageSaver {
     .catch(error => console.error('Error: ', error))
     .then(function(myJson) {
       console.log("Checkpoint for POST --> myJson:", myJson)
-      return response.json()
     })
   }
 }

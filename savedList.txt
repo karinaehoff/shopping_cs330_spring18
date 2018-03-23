@@ -1,1 +1,1 @@
-{"newItems": [], "handlers": [None, None], "_itemList": [{"_price": "$5", "_priority": "low", "_purchased": False, "_section": "Food", "_qty": "1", "_store": "Walmart", "_name": "PB"}], "oldItems": []}
+{"handlers": [none, none], "_itemList": [{"_section": "food", "_priority": "low", "_store": "Walmart", "_name": "PB", "_purchased": false, "_price": "$5", "_qty": "1"}], "oldItems": [], "newItems": []}

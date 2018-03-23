@@ -20,7 +20,7 @@ def getListFromDB():
 def saveToDB(): #savedList
     jsondata = str(request.get_json())
     jsondata = jsondata.replace("'", "\"")
-    jsondata = jsondata.replace("N", "n")
+
 
     newFile = open('savedList.txt', 'w')
     newFile.write(jsondata)
