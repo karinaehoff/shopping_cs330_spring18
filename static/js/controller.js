@@ -57,7 +57,7 @@ function clickedOn() {
 
 function deleteList() {
 	shoppingModel = new ShoppingList([]);
-	dbListSaver = new saveToDatabase(shoppingModel, "shoppingList")
+	dbListSaver = new RemoteStorageSaver(shoppingModel, "shoppingList")
 	view.redrawTable(shoppingModel)
 }
 

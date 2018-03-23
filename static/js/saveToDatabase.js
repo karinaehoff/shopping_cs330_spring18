@@ -9,21 +9,33 @@ class RemoteStorageSaver {
       })
       // now restore from dataBaseStorageSaver
       // fetch get
-     fetch(`http://localhost:5001/shoppingList`).then(function(response) {
+     fetch(`/shoppingList`).then(function(response) {
         console.log(response)
-        return response.json()
+        let returnThing = response.json()
+        console.log(returnThing)
+        return returnThing
       })
         .then(function(restore_list) {
+          console.log("Restore List:", restore_list)
+          console.log(typeof restore_list)
+          let vari = JSON.parse(restore_list)
+          console.log(typeof vari)
           if (restore_list != null) {
-            for (let vals of restore_list) {
-              let item = new Item(this, vals._name, vals._store, vals._section,
-                                  vals._qty, vals._price, vals._priority)
-              model.addItem(item)
-            }
+              for (let values of restore_list) {
+                console.log(values)
+                let restoredList = new ShoppingList([this, values.oldItems,
+                    values.newItems, values._itemList, values.handlers])
+                console.log(restoredList)
+                  for (let vals of restoredList._itemList) {
+                    let item = new Item(this, vals._name, vals._store, vals._section,
+                                        vals._qty, vals._price, vals._priority)
+                    model.addItem(item)
+                  }
+              }
           }
         }).catch(error => console.error('Error: ', error))
         .then(function(myJson) {
-          console.log("Checkpoint for get")
+          console.log("Checkpoint for GET --> myJson:", myJson)
         })
   }
 
@@ -31,20 +43,22 @@ class RemoteStorageSaver {
     // localStorage.setItem(this.lsname, ls_list) // change to post
     let config = {};
     config.method = 'POST'
-
-    config.body = JSON.stringify(slist)
+    let jsonStr = JSON.stringify(slist)
+    console.log("JSON:", jsonStr)
+    config.body = jsonStr
     config.headers = {'Content-Type': 'application/json',
                       'Accept': 'application/json'}
 
     // let ls_list = JSON.stringify(slist._itemList) // change to fetch
-    fetch(`http://localhost:5001/saveList`, config)
+    fetch(`/saveList`, config)
     .then(function(response){
       console.log(response)
       return response.json()
     })
     .catch(error => console.error('Error: ', error))
     .then(function(myJson) {
-      console.log("Checkpoint for post")
+      console.log("Checkpoint for POST --> myJson:", myJson)
+      return response.json()
     })
   }
 }
