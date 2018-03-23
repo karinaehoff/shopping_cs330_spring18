@@ -39,7 +39,7 @@ class ShoppingView {
 		let cb = document.createElement("input")
 		cb.type = "checkbox"
 		cb.value = "unchecked"
-		// cb.click = checked(cb, item, row)
+		// cb.onclick = checked(cb, item, row)
 		row.appendChild(cb)
 
 		for (let val of ['name', 'store', 'section', 'qty', 'price']) {

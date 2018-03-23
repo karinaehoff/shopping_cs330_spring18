@@ -6,9 +6,13 @@
 "use strict"
 
 var shoppingModel = new ShoppingList([]);
-var listSaver = new LocalStorageSaver(shoppingModel, "shoppingList");
-var dbListSaver = new saveToDatabase(shoppingModel, "shoppingList")
+// console.log("Created shoppingModel")
+// var listSaver = new LocalStorageSaver(shoppingModel, "shoppingList");
+// console.log("Created listSaver")
+var dbListSaver = new RemoteStorageSaver(shoppingModel, "shoppingList")
+// console.log("Created dbListSaver")
 var view = new ShoppingView(shoppingModel);
+// console.log("Created view")
 
 var stores = ["Dragonfly",  "Fareway", "Fleet Farm", "Walmart"]
 
