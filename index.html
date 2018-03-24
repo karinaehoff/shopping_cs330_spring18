@@ -1,7 +1,7 @@
 <!--
 	HTML for Shopping List App
 	Author: Kari Hoff
-	Class: CS 330
+	Class: CS 330 Internet Programming
 -->
 
 <!DOCTYPE html>
@@ -13,18 +13,22 @@
 			content="A Shopping List Application" />
 		<meta http-equiv="author"
 			content="Kari Hoff" />
-		<!-- Original Style Sheet -->
-		<!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet"
+					href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+					integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+					crossorigin="anonymous">
+
 	</head>
 
-	<body onload="displayStores()">
+	<body>
 
 		<!-- Navigation Bar -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		  <a class="navbar-brand" href="#">Shopping List</a>
-		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		  <button class="navbar-toggler" type="button" data-toggle="collapse"
+							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+							aria-expanded="false" aria-label="Toggle navigation">
 		    <span class="navbar-toggler-icon"></span>
 		  </button>
 
@@ -37,7 +41,8 @@
 		        <a class="nav-link" href="#">Link</a>
 		      </li>
 		      <li class="nav-item dropdown">
-		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+							 role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		          Dropdown
 		        </a>
 		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -56,6 +61,7 @@
 		</nav>
 
 		<!-- Input Field -->
+		<!-- Add Requirements for Field to be filled out -->
 		<div class="container" style="width: 75%;">
 		  <div class="row">
 		    <div class="col">
@@ -93,7 +99,7 @@
 		    </div>
 		    <div class="col">
 		      <p>Section
-				<select id="section" required="required">
+				<select id="section">
 					<option label=" "></option>
 				</select></p>
 		    </div>
@@ -119,8 +125,10 @@
 			<label for="high">High</label>
 		</p> -->
 
-				<div class="mx-auto" style="width:200px;"> <!-- class="center"> -->
-					<button type="button" id=addItemButton onclick="clickedOn()">Add Item</button>
+				<div class="mx-auto" style="width:500px;"> <!-- class="center"> -->
+					<button type="button" id="addItemButton" onclick="clickedOn()">Add Item</button>
+					<button type="button" id="sortByPriority" onclick="sortPriort()">Sort By Priority</button>
+					<button type="button" id="deleteListButton" onclick="deleteList()">Delete List</button>
 				</div> <!-- End of center div -->
 			</fieldset>
 
@@ -128,15 +136,15 @@
 
 		<!-- Shopping List -->
 		<div id=shoppingList>
-			<table id=itemList class="table mx-auto" style="width:80%;">
-				<thead class="thead-light">
+			<table id=itemList class="mx-auto sortable" style="width:80%;">
+				<thead>
 					<tr>
 						<th></th> <!-- This is to format for the check box for each row -->
-						<th scope="col">Item</th>
-						<th scope="col">Quantity</th>
-						<th scope="col">Store</th>
-						<th scope="col">Section</th>
-						<th scope="col">Price</th>
+						<th scope="col" id="itemHead" data-sort="name" data-toggle="tooltip" title="Sort by Name" onclick="order(this.id)">Item</th>
+						<th scope="col" id="storeHead" data-sort="name" data-toggle="tooltip" title="Sort by Store" onclick="order(this.id)">Store</th>
+						<th scope="col" id="sectionHead" data-sort="name" data-toggle="tooltip" title="Sort by Section" onclick="order(this.id)">Section</th>
+						<th scope="col" id="qtyHead" data-sort="name" data-toggle="tooltip" title="Sort by Quantity" onclick="order(this.id)">Quantity</th>
+					  <th scope="col" id="priceHead" data-sort="name" data-toggle="tooltip" title="Sort by Price" onclick="order(this.id)">Price</th>
 					</tr>
 				</thead>
 
@@ -150,10 +158,17 @@
 			</table>
 		</div> <!-- end of shoppingList -->
 
-		
-		<script type="text/javascript" src="js/model.js?=x15"></script>
-		<script type="text/javascript" src="js/view.js?=x15"></script>
-		<script type="text/javascript" src="js/controller.js?=x15"></script>
+		<script type="text/javascript" src="js/model.js?=x1"></script>
+		<script type="text/javascript" src="js/view.js?=x1"></script>
+		<script type="text/javascript" src="js/savelocal.js?=x1"></script>
+		<script type="text/javascript" src="js/controller.js?=x1"></script>
+		<script>
+			window.onload = function() {
+				// alert("Welcome to the Shopping List!")
+				displayStores()
+				view.redrawTable(shoppingModel)
+			}
+		</script>
 	</body>
-	
+
 </html>
