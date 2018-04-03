@@ -16,8 +16,6 @@ var sections = {"Dragonfly":["Fiction", "Nonfiction"],
 				"Fleet Farm":["Housewares", "Clothing", "Pets"],
 				"Walmart":["Electronics", "Pharmacy", "Food"]}
 
-// let itemNum = 1;
-
 // Called when add button is clicked
 function clickedOn() {
 
@@ -40,22 +38,26 @@ function clickedOn() {
 	// Create new item
 	let newItem = new Item(self, productVal, storeVal, sectionVal, qtyVal, priceVal, priorityVal);
 
-	// Call shoppingList addItem method & clear input fields
+	// Add item to shoppingList
 	shoppingModel.addItem(newItem);
 	view.redrawTable(shoppingModel)
 
+	// Clear Input Fields
 	for (let ref of [product, store, section, qty, price, priority]) {
 		ref.value = ""
 	}
 
 }
 
+// Called when "Delete List" Button is clicked
 function deleteList() {
-	shoppingModel = new ShoppingList([]);
-	listSaver = new LocalStorageSaver(shoppingModel, "shoppingList")
+	// add "Are you sure you want to permanently delete this list?" Alert & Confirm
+	shoppingModel._itemList = [];
+	localStorage.clear()
 	view.redrawTable(shoppingModel)
 }
 
+// Called when page is loaded
 function displayStores() {
 	let selectTag = document.getElementById("store")
 	for (let store of stores) {
@@ -66,6 +68,7 @@ function displayStores() {
 	}
 }
 
+// Called when store is selected
 function displaySections() {
 	let storeSelect = document.getElementById("store")
 	let store = storeSelect.value
@@ -83,8 +86,13 @@ function displaySections() {
 	}
 }
 
+
+// JUNK CODE BELOW -- FIX
+
+
 // Delete an item & its row if the checkbox is checked
-// This has never worked and I'm at a loss to explain why
+	// This has never worked and I'm at a loss to explain why
+
 // function checked(cb, item, row) {
 	// if (cb.checked) {
 	// 	alert("Box Checked")
@@ -102,7 +110,10 @@ function displaySections() {
 	// row.style.display = "none" //?
 // }
 
+
 // Function for sorting the list by column by clicking on the head
+// Reference w3 schools, can just pull their code, apparently -- might have to
+//   make slight modifications
 function order(specifier) {
 	// console.log(specifier)
 
@@ -155,6 +166,65 @@ function order(specifier) {
   // console.log(identifier)
 }
 
+// from w3schools -- needs to be further modified, still not correct
+function sortTable(n) {
+  let table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("itemList");
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = "asc";
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.getElementsByTagName("TR");
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+			// checking for comparision error (1, 10, 5, 6)
+			// console.log(x)
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+			// console.log(y)
+      /*check if the two rows should switch place,
+      based on the direction, asc or desc:*/
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Each time a switch is done, increase this count by 1:
+      switchcount ++;
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+
 function sortPriort() {
 	let undefinedPriort = [];
 	let lowPriort = [];
@@ -182,7 +252,7 @@ function sortPriort() {
 		}
 	}
 
-	console.log(shoppingModel._itemList)
+	// console.log(shoppingModel._itemList)
 	view.redrawTable(shoppingModel)
 }
 

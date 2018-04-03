@@ -36,11 +36,14 @@ class ShoppingView {
 				} else {
 					row.style.backgroundColor = "#f2f2f2"
 				}
+		let div = document.createElement("div")
+		div.class = "checkboxDiv"
 		let cb = document.createElement("input")
 		cb.type = "checkbox"
 		cb.value = "unchecked"
 		// cb.click = checked(cb, item, row)
-		row.appendChild(cb)
+		div.appendChild(cb)
+		row.appendChild(div)
 
 		for (let val of ['name', 'store', 'section', 'qty', 'price']) {
 			let td = document.createElement("td")
